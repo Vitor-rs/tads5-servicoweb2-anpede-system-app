@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { insertView } from "@ionic/angular/directives/navigation/stack-utils";
 import { Observable } from "rxjs";
 import { API_CONFIG } from "src/app/config/api.config";
 import { EquipamentoDTO } from "src/app/models/EquipamentoDTO";
@@ -13,5 +14,18 @@ export class EquipamentoService {
 
     findAll() : Observable<EquipamentoDTO[]> {
         return this.http.get<EquipamentoDTO[]>(`${API_CONFIG.baseUrl}/equipamentos`);
+    }
+
+    findById(id: number) : Observable<EquipamentoDTO> {
+        return this.http.get<EquipamentoDTO>(
+            `${API_CONFIG.baseUrl}/equipamentos/${id}`);
+    }
+
+    insert(equipamento: EquipamentoDTO){
+        return this.http.post(`${API_CONFIG.baseUrl}/equipamentos`, 
+                                equipamento, {
+                                    observe: 'response', 
+                                    responseType: 'text'
+                                });
     }
 }
