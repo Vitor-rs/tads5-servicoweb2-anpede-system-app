@@ -11,7 +11,7 @@
 
   <ion-fab slot="fixed" vertical="top" 
            horizontal="end" [edge]="true">
-    <ion-fab-button (click)="addEditEquipamento()">
+    <ion-fab-button routerLink="/add-edit-equipamento/-1" >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -34,7 +34,7 @@
           <ion-icon slot="start" name="create"></ion-icon>
           Editar
         </ion-item-option>
-        <ion-item-option color="secondary">
+        <ion-item-option color="secondary" (click)="excluirEquipamento(equipamento.id)">
           <ion-icon slot="start" name="trash"></ion-icon>
           Deletar
         </ion-item-option>

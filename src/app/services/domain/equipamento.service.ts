@@ -28,4 +28,16 @@ export class EquipamentoService {
                                     responseType: 'text'
                                 });
     }
+
+    update(equipamento: EquipamentoDTO){
+        return this.http.put(`${API_CONFIG.baseUrl}/equipamentos/${equipamento.id}`, 
+                                equipamento, {
+                                    observe: 'response', 
+                                    responseType: 'text'
+                                });
+    }
+
+    delete(id: number){
+        return this.http.delete(`${API_CONFIG.baseUrl}/equipamentos/${id}`)
+    }
 }

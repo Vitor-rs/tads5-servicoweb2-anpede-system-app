@@ -30,6 +30,16 @@ export class SelEquipamentoPage implements OnInit {
     this.navController.navigateForward('add-edit-equipamento');
   }
 
+  excluirEquipamento(id: number){
+    this.equipamentoService.delete(id)
+                           .subscribe({
+                              next: 
+                                (response) => window.location.reload(),                              
+                              error:
+                                (error) => console.log(error)
+                           });
+  }
+
   ngOnInit() {
   }
 

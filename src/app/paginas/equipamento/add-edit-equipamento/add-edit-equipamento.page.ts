@@ -11,6 +11,8 @@ import { EquipamentoService } from 'src/app/services/domain/equipamento.service'
 })
 export class AddEditEquipamentoPage implements OnInit {
 
+  public modoDeEdicao = false;
+
   equipamentoForm!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -20,30 +22,56 @@ export class AddEditEquipamentoPage implements OnInit {
               public equipamentoService: EquipamentoService) { }
 
   submit(){
-    this.equipamentoService.insert(this.equipamentoForm.value)
-                           .subscribe(response => {
-                            this.presentAlert('Sucesso',
-                              'O equipamento foi salvo com sucesso',
-                              ['Ok'])
-                           })
+    if(!this.modoDeEdicao){
+      this.equipamentoService.insert(this.equipamentoForm.value)
+      .subscribe(response => {
+       this.presentAlert('Sucesso',
+         'O equipamento foi salvo com sucesso',
+         ['Ok'])
+      })
+    }
+    if(this.modoDeEdicao){
+      this.equipamentoService.update(this.equipamentoForm.value)
+      .subscribe(response => {
+       this.presentAlert('Sucesso',
+         'O equipamento foi atualizado com sucesso',
+         ['Ok'])
+      })
+    }
+    
   }
 
   ngOnInit() {
 
     const id: number = Number(this.route.snapshot.paramMap.get('id'));
     
-    this.equipamentoService.findById(id).subscribe(response => {
-      this.equipamentoForm = this.formBuilder.group({
-        id: [response.id],      
-        nome: [response.nome, Validators.required],
-        descricao: [response.descricao, Validators.required], 
-        marca: [response.marca, Validators.required], 
-        categoria: [response.categoria, Validators.required], 
-        foto: [response.foto, Validators.required], 
-        valor: [response.valor, Validators.required],
-        quantidade: [response.quantidade, Validators.required]
+    if(id > 0){
+      this.modoDeEdicao = true;
+      this.equipamentoService.findById(id).subscribe(response => {
+        this.equipamentoForm = this.formBuilder.group({
+          id: [response.id],      
+          nome: [response.nome, Validators.required],
+          descricao: [response.descricao, Validators.required], 
+          marca: [response.marca, Validators.required], 
+          categoria: [response.categoria, Validators.required], 
+          foto: [response.foto, Validators.required], 
+          valor: [response.valor, Validators.required],
+          quantidade: [response.quantidade, Validators.required]
+        })
       })
-    })
+    } else {
+      this.modoDeEdicao = false;
+      this.equipamentoForm = this.formBuilder.group({
+        id,
+        nome: ['', Validators.required],
+        descricao: ['', Validators.required], 
+        marca: ['', Validators.required], 
+        categoria: ['', Validators.required], 
+        foto: ['', Validators.required], 
+        valor: ['', Validators.required],
+        quantidade: ['', Validators.required]
+      })
+    }
 
     
   }

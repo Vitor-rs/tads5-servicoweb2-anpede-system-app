@@ -36,8 +36,12 @@
     </ion-item>
 
     <ion-button shape="round" expand="block" 
-                padding type="submit">
+                padding type="submit" *ngIf="!modoDeEdicao">
       Cadastrar
+    </ion-button>
+    <ion-button shape="round" expand="block" 
+                padding type="submit" *ngIf="modoDeEdicao">
+      Alterar
     </ion-button>
   </form>
 </ion-content>
