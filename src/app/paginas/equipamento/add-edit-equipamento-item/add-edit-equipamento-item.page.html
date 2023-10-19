@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>add-edit-equipamento-item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <form [formGroup]="equipamentoItemForm" *ngIf="equipamentoItemForm" (ngSubmit)="submit()">
+      <ion-item>
+        <ion-label position="floating">Numero de Serie</ion-label>
+        <ion-input formControlName="numeroSerie" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Situação</ion-label>
+        <ion-select formControlName="situacao" placeholder="Selecione...">
+          <ion-select-option value="RESERVADO">Reservado</ion-select-option>
+          <ion-select-option value="EMPRESTADO">Emprestado</ion-select-option>
+          <ion-select-option value="DISPONIVEL">Disponível</ion-select-option>
+          <ion-select-option value="INDISPONIVEL">Indisponível</ion-select-option>
+          <ion-select-option value="MANUTENCAO">Manutenção</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Equipamento</ion-label>
+        <ion-select formControlName="equipamento" placeholder="Selecione...">
+          <ion-select-option *ngFor="let equipamento of equipamentos" 
+                              value="{{equipamento.id}}">{{equipamento.nome}}</ion-select-option>          
+        </ion-select>
+      </ion-item>
+  
+      <ion-button shape="round" expand="block" 
+                  padding type="submit">
+        Cadastrar
+        
+      </ion-button>
+      <!--
+      <ion-button shape="round" expand="block" 
+                  padding type="submit" *ngIf="modoDeEdicao">
+        Alterar
+      </ion-button>
+  -->
+  </form>
+</ion-content>

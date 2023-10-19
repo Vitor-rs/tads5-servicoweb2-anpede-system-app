@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'add-edit-equipamento/:id',
     loadChildren: () => import('./paginas/equipamento/add-edit-equipamento/add-edit-equipamento.module').then( m => m.AddEditEquipamentoPageModule)
+  },
+  {
+    path: 'add-edit-equipamento-item',
+    loadChildren: () => import('./paginas/equipamento/add-edit-equipamento-item/add-edit-equipamento-item.module').then( m => m.AddEditEquipamentoItemPageModule)
   }
 ];
 

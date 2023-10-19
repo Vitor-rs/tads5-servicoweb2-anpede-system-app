@@ -14,6 +14,10 @@ export class HomePage implements OnInit {
     this.nav.navigateForward('sel-equipamento');
   }
 
+  equipamentoItem(){
+    this.nav.navigateForward('add-edit-equipamento-item');
+  }
+
   ngOnInit() {
   }
 
