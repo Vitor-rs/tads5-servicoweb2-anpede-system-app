@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { discardPeriodicTasks } from '@angular/core/testing';
+import { disableDebugTools } from '@angular/platform-browser';
+import { LoadingController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +9,8 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  imagensGrid!: any[];
 
   constructor(public nav: NavController) { }
 
@@ -19,6 +23,28 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.imagensGrid = [
+      {
+        img: 'assets/dashboard/disabled.png',
+        name: 'Equipamento'
+      },
+      {
+        img: 'assets/dashboard/add.png',
+        name: 'Item de Equipamento'
+      },
+      {
+        img: 'assets/dashboard/adult-diapers.png',
+        name: 'Fraldas'
+      },
+      {
+        img: 'assets/dashboard/loan.png',
+        name: 'Emprestimos'
+      }
+    ]
+  }
+
+  navegacao(){
+    
   }
 
 }
